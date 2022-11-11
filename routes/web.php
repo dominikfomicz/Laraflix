@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Movie;
-use App\Models\Person;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\PersonController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,12 +31,10 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
-
-
-Route::get('/test', function (){
-	$movie = Movie::with('persons.roles')->findOrFail(1);
-	$person = Person::with('roles')->findOrFail(1);
-
-	dd($movie);
+Route::middleware(['auth', 'verified'])->group(static function (): void {
+	Route::resource('movies', MovieController::class);
+	Route::resource('persons', PersonController::class);
+	Route::resource('roles', RoleController::class);
 });
+
+require __DIR__.'/auth.php';
