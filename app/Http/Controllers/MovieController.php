@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MovieStoreRequest;
+use App\Http\Requests\MovieUpdateRequest;
 use App\Http\Resources\MovieCollectionResource;
 use App\Models\Movie;
 use App\Repositories\MovieRepository;
 use App\Services\MovieService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -65,12 +65,33 @@ class MovieController extends Controller
     {
     }
 
-    public function edit(Movie $movie)
+    /**
+     * @param  Movie  $movie
+     * @return Response
+     */
+    public function edit(Movie $movie): Response
     {
+        return Inertia::render(
+            'Movie/MovieEdit', [
+                'movie' => $movie
+            ]
+        );
     }
 
-    public function update(Request $request, Movie $movie)
+    /**
+     * @param  MovieUpdateRequest  $request
+     * @param  Movie  $movie
+     * @return RedirectResponse|\never
+     */
+    public function update(MovieUpdateRequest $request, Movie $movie)
     {
+        $movie = $this->service->updateMovie($request, $movie);
+
+        if ($movie) {
+            return redirect()->route('movies.index');
+        }
+
+        return abort(500);
     }
 
     public function destroy(Movie $movie)
