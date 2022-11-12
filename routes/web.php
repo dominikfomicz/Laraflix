@@ -27,14 +27,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->group(static function (): void {
-	Route::resource('movies', MovieController::class);
-	Route::resource('persons', PersonController::class);
-	Route::resource('roles', RoleController::class);
+    Route::resource('movies', MovieController::class);
+    Route::resource('persons', PersonController::class);
+    Route::resource('roles', RoleController::class);
 });
 
 require __DIR__.'/auth.php';
