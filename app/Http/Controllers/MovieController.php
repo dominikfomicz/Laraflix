@@ -8,6 +8,7 @@ use App\Http\Resources\MovieCollectionResource;
 use App\Models\Movie;
 use App\Repositories\MovieRepository;
 use App\Services\MovieService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -16,6 +17,7 @@ class MovieController extends Controller
 {
     /**
      * @param  MovieRepository  $repository
+     * @param  MovieService  $service
      */
     public function __construct(private MovieRepository $repository, private MovieService $service)
     {
@@ -82,9 +84,12 @@ class MovieController extends Controller
      * @param  MovieUpdateRequest  $request
      * @param  Movie  $movie
      * @return RedirectResponse|\never
+     * @throws AuthorizationException
      */
     public function update(MovieUpdateRequest $request, Movie $movie)
     {
+        $this->authorize('own', $movie);
+
         $movie = $this->service->updateMovie($request, $movie);
 
         if ($movie) {
@@ -94,7 +99,17 @@ class MovieController extends Controller
         return abort(500);
     }
 
+    /**
+     * @param  Movie  $movie
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
     public function destroy(Movie $movie)
     {
+        $this->authorize('own', $movie);
+
+        $movie->delete();
+
+        return redirect()->route('movies.index');
     }
 }
