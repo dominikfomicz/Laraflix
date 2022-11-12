@@ -10,6 +10,9 @@ use Inertia\Inertia;
 
 class MovieController extends Controller
 {
+    /**
+     * @param  MovieRepository  $repository
+     */
     public function __construct(private MovieRepository $repository)
     {
     }

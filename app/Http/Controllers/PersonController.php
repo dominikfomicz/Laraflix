@@ -2,38 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PersonCollectionResource;
 use App\Models\Person;
+use App\Repositories\PersonRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PersonController extends Controller
 {
-	public function index()
-	{
-		return Inertia::render('Person/PersonIndex');
-	}
+    /**
+     * @param  PersonRepository  $repository
+     */
+    public function __construct(private PersonRepository $repository)
+    {
+    }
 
-	public function create()
-	{
-	}
+    public function index()
+    {
+        $persons = PersonCollectionResource::collection($this->repository->getPaginated());
 
-	public function store(Request $request)
-	{
-	}
+        return Inertia::render('Person/PersonIndex', [
+            'persons' => $persons
+        ]);
+    }
 
-	public function show(Person $person)
-	{
-	}
+    public function create()
+    {
+    }
 
-	public function edit(Person $person)
-	{
-	}
+    public function store(Request $request)
+    {
+    }
 
-	public function update(Request $request, Person $person)
-	{
-	}
+    public function show(Person $person)
+    {
+    }
 
-	public function destroy(Person $person)
-	{
-	}
+    public function edit(Person $person)
+    {
+    }
+
+    public function update(Request $request, Person $person)
+    {
+    }
+
+    public function destroy(Person $person)
+    {
+    }
 }

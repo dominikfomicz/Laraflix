@@ -2,38 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\RoleCollectionResource;
 use App\Models\Role;
+use App\Repositories\RoleRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class RoleController extends Controller
 {
-	public function index()
-	{
-		return Inertia::render('Role/RoleIndex');
-	}
+    /**
+     * @param  RoleRepository  $repository
+     */
+    public function __construct(private RoleRepository $repository)
+    {
+    }
 
-	public function create()
-	{
-	}
+    public function index()
+    {
+        $roles = RoleCollectionResource::collection($this->repository->getPaginated());
 
-	public function store(Request $request)
-	{
-	}
+        return Inertia::render('Role/RoleIndex', ['roles' => $roles]);
+    }
 
-	public function show(Role $role)
-	{
-	}
+    public function create()
+    {
+    }
 
-	public function edit(Role $role)
-	{
-	}
+    public function store(Request $request)
+    {
+    }
 
-	public function update(Request $request, Role $role)
-	{
-	}
+    public function show(Role $role)
+    {
+    }
 
-	public function destroy(Role $role)
-	{
-	}
+    public function edit(Role $role)
+    {
+    }
+
+    public function update(Request $request, Role $role)
+    {
+    }
+
+    public function destroy(Role $role)
+    {
+    }
 }
