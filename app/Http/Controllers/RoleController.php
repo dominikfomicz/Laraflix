@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Repositories\RoleRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class RoleController extends Controller
 {
@@ -17,11 +18,18 @@ class RoleController extends Controller
     {
     }
 
-    public function index()
+    /**
+     * @return Response
+     */
+    public function index(): Response
     {
-        $roles = RoleCollectionResource::collection($this->repository->getPaginated());
+        $roles = RoleCollectionResource::collection(
+            $this->repository->getPaginated()
+        );
 
-        return Inertia::render('Role/RoleIndex', ['roles' => $roles]);
+        return Inertia::render('Role/RoleIndex', [
+            'roles' => $roles
+        ]);
     }
 
     public function create()

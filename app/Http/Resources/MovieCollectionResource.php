@@ -22,7 +22,8 @@ class MovieCollectionResource extends JsonResource
         return [
             'id' => data_get($this, 'id'),
             'title' => data_get($this, 'title'),
-            'created_at' => data_get($this, 'created_at') ? data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'created_at' => data_get($this, 'created_at') ?
+                data_get($this, 'created_at')->format('Y-m-d H:i') : '',
         ];
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Person;
 use App\Repositories\PersonRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PersonController extends Controller
 {
@@ -17,9 +18,14 @@ class PersonController extends Controller
     {
     }
 
-    public function index()
+    /**
+     * @return Response
+     */
+    public function index(): Response
     {
-        $persons = PersonCollectionResource::collection($this->repository->getPaginated());
+        $persons = PersonCollectionResource::collection(
+            $this->repository->getPaginated()
+        );
 
         return Inertia::render('Person/PersonIndex', [
             'persons' => $persons
