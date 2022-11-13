@@ -102,6 +102,6 @@ class RoleController extends Controller
     {
         $role->delete();
 
-        return redirect()->route('roles.index');
+        return redirect()->back();
     }
 }

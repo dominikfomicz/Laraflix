@@ -24,6 +24,19 @@ class MovieCollectionResource extends JsonResource
             'title' => data_get($this, 'title'),
             'created_at' => data_get($this, 'created_at') ?
                 data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'actions' => $this->getActions()
+        ];
+    }
+
+    private function getActions()
+    {
+        if ($this->user_id !== auth()->user()->id) {
+            return [];
+        }
+
+        return [
+            'edit' => route('movies.edit', ['movie' => data_get($this, 'id')]),
+            'destroy' => route('movies.destroy', ['movie' => data_get($this, 'id')])
         ];
     }
 }

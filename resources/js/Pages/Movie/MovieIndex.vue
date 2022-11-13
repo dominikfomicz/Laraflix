@@ -24,10 +24,12 @@ export default {
 			columns: [
 				{name: 'Title', attribute: 'title'},
 				{name: 'Created at', attribute: 'created_at'},
+				{name: '', attribute: 'actions', class: 'text-right'},
 			]
 		}
 	},
 	mounted() {
+		console.log(this.movies)
 	}
 }
 </script>

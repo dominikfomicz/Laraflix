@@ -104,6 +104,6 @@ class PersonController extends Controller
     {
         $person->delete();
 
-        return redirect()->route('persons.index');
+        return redirect()->back();
     }
 }

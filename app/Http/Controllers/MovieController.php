@@ -115,6 +115,6 @@ class MovieController extends Controller
 
         $movie->delete();
 
-        return redirect()->route('movies.index');
+        return redirect()->back();
     }
 }
