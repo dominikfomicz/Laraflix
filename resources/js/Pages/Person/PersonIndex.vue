@@ -1,7 +1,8 @@
 <script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DataTable from '@/Components/DataTable.vue';
-import {Head} from '@inertiajs/inertia-vue3';
+import {Head, Link} from '@inertiajs/inertia-vue3';
+import AddButton from "@/Components/AddButton.vue";
 
 export default {
 	props: {
@@ -14,7 +15,9 @@ export default {
 	components: {
 		AuthenticatedLayout,
 		DataTable,
-		Head
+		AddButton,
+		Head,
+		Link
 	},
 	setup() {
 		return {
@@ -34,9 +37,18 @@ export default {
 
 	<AuthenticatedLayout>
 		<template #header>
-			<h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-				Persons
-			</h2>
+			<div class="grid grid-cols-2">
+				<div>
+					<h5 class="font-semibold text-2xl text-gray-800 leading-tight">
+						Persons
+					</h5>
+				</div>
+				<div class="text-end">
+					<Link :href="route('persons.create')">
+						<AddButton/>
+					</Link>
+				</div>
+			</div>
 		</template>
 
 		<div class="py-12">

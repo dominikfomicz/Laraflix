@@ -53,8 +53,8 @@ export default {
 					<div class="p-6 bg-white border-b border-gray-200">
 						<form @submit.prevent="submit">
 							<div>
-								<InputLabel for="name" value="Title"/>
-								<TextInput id="name" v-model="form.title" autocomplete="title" autofocus
+								<InputLabel for="title" value="Title"/>
+								<TextInput id="title" v-model="form.title" autocomplete="title" autofocus
 										   class="mt-1 block w-full"
 										   required type="text"/>
 								<InputError :message="form.errors.title" class="mt-2"/>

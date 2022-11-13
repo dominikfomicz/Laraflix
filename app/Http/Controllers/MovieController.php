@@ -19,8 +19,10 @@ class MovieController extends Controller
      * @param  MovieRepository  $repository
      * @param  MovieService  $service
      */
-    public function __construct(private MovieRepository $repository, private MovieService $service)
-    {
+    public function __construct(
+        private MovieRepository $repository,
+        private MovieService $service
+    ) {
     }
 
     /**
@@ -70,9 +72,12 @@ class MovieController extends Controller
     /**
      * @param  Movie  $movie
      * @return Response
+     * @throws AuthorizationException
      */
     public function edit(Movie $movie): Response
     {
+        $this->authorize('own', $movie);
+
         return Inertia::render(
             'Movie/MovieEdit', [
                 'movie' => $movie

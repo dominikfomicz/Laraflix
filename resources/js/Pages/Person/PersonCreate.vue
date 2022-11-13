@@ -7,11 +7,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 
 export default {
-	props: {
-		movie: Object,
-		persons: Array,
-		roles: Array,
-	},
+	props: {},
 	components: {
 		InputError,
 		InputLabel,
@@ -21,16 +17,16 @@ export default {
 		Head,
 		Link
 	},
-	data() {
+	setup() {
 		return {
 			form: useForm({
-				title: this.movie.title
+				name: ''
 			})
 		}
 	},
 	methods: {
 		submit() {
-			this.form.patch(route('movies.update', {id: this.movie.id}));
+			this.form.post(route('persons.store'));
 		}
 	},
 	mounted() {
@@ -39,12 +35,12 @@ export default {
 </script>
 
 <template>
-	<Head title="Edit movie"/>
+	<Head title="Create person"/>
 
 	<AuthenticatedLayout>
 		<template #header>
 			<h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-				Edit movie
+				Create person
 			</h2>
 		</template>
 
@@ -54,17 +50,17 @@ export default {
 					<div class="p-6 bg-white border-b border-gray-200">
 						<form @submit.prevent="submit">
 							<div>
-								<InputLabel for="title" value="Title"/>
-								<TextInput id="title" v-model="form.title" autocomplete="title" autofocus
+								<InputLabel for="name" value="Name"/>
+								<TextInput id="name" v-model="form.name" autocomplete="name" autofocus
 										   class="mt-1 block w-full"
 										   required type="text"/>
-								<InputError :message="form.errors.title" class="mt-2"/>
+								<InputError :message="form.errors.name" class="mt-2"/>
 							</div>
 
 							<div class="flex items-center justify-end mt-4">
 								<PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
 											   class="ml-4">
-									Edit
+									Create
 								</PrimaryButton>
 							</div>
 						</form>
