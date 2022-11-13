@@ -109,7 +109,7 @@ class MovieController extends Controller
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(Movie $movie)
+    public function destroy(Movie $movie): RedirectResponse
     {
         $this->authorize('own', $movie);
 

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleStoreRequest;
+use App\Http\Requests\RoleUpdateRequest;
 use App\Http\Resources\RoleCollectionResource;
 use App\Models\Role;
 use App\Repositories\RoleRepository;
-use Illuminate\Http\Request;
+use App\Services\RoleService;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -13,8 +16,9 @@ class RoleController extends Controller
 {
     /**
      * @param  RoleRepository  $repository
+     * @param  RoleService  $service
      */
-    public function __construct(private RoleRepository $repository)
+    public function __construct(private RoleRepository $repository, private RoleService $service)
     {
     }
 
@@ -32,27 +36,72 @@ class RoleController extends Controller
         ]);
     }
 
-    public function create()
+    /**
+     * @return Response
+     */
+    public function create(): Response
     {
+        return Inertia::render(
+            'Role/RoleCreate',
+        );
     }
 
-    public function store(Request $request)
+    /**
+     * @param  RoleStoreRequest  $request
+     * @return RedirectResponse|\never
+     */
+    public function store(RoleStoreRequest $request)
     {
+        $role = $this->service->createRole($request);
+
+        if ($role) {
+            return redirect()->route('roles.index');
+        }
+
+        return abort(500);
     }
 
     public function show(Role $role)
     {
     }
 
-    public function edit(Role $role)
+    /**
+     * @param  Role  $role
+     * @return Response
+     */
+    public function edit(Role $role): Response
     {
+        return Inertia::render(
+            'Role/RoleEdit', [
+                'role' => $role
+            ]
+        );
     }
 
-    public function update(Request $request, Role $role)
+    /**
+     * @param  RoleUpdateRequest  $request
+     * @param  Role  $role
+     * @return RedirectResponse|\never
+     */
+    public function update(RoleUpdateRequest $request, Role $role)
     {
+        $role = $this->service->updateRole($request, $role);
+
+        if ($role) {
+            return redirect()->route('roles.index');
+        }
+
+        return abort(500);
     }
 
-    public function destroy(Role $role)
+    /**
+     * @param  Role  $role
+     * @return RedirectResponse
+     */
+    public function destroy(Role $role): RedirectResponse
     {
+        $role->delete();
+
+        return redirect()->route('roles.index');
     }
 }

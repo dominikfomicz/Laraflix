@@ -100,7 +100,7 @@ class PersonController extends Controller
      * @param  Person  $person
      * @return RedirectResponse
      */
-    public function destroy(Person $person)
+    public function destroy(Person $person): RedirectResponse
     {
         $person->delete();
 
