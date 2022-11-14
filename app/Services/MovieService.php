@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Http\Requests\MovieStoreRequest;
 use App\Http\Requests\MovieUpdateRequest;
-use App\Http\Resources\MoviePerson\MoviePersonCreateEditCollection;
 use App\Models\Movie;
 
 class MovieService

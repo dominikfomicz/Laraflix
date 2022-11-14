@@ -5,6 +5,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Checkbox from '@/Components/Checkbox.vue';
 
 export default {
 	props: {
@@ -15,6 +16,7 @@ export default {
 		InputLabel,
 		PrimaryButton,
 		TextInput,
+		Checkbox,
 		AuthenticatedLayout,
 		Head,
 		Link
@@ -60,6 +62,27 @@ export default {
 										   class="mt-1 block w-full"
 										   required type="text"/>
 								<InputError :message="form.errors.name" class="mt-2"/>
+							</div>
+
+							<div class="block mt-4">
+								<label class="flex items-center">
+									<Checkbox v-model:checked="form.is_actor" name="is_actor"/>
+									<span class="ml-2 text-sm text-gray-600">Actor</span>
+								</label>
+							</div>
+
+							<div class="block mt-4">
+								<label class="flex items-center">
+									<Checkbox v-model:checked="form.is_producer" name="is_producer"/>
+									<span class="ml-2 text-sm text-gray-600">Producer</span>
+								</label>
+							</div>
+
+							<div class="block mt-4">
+								<label class="flex items-center">
+									<Checkbox v-model:checked="form.is_director" name="is_director"/>
+									<span class="ml-2 text-sm text-gray-600">Director</span>
+								</label>
 							</div>
 
 							<div class="flex items-center justify-end mt-4">

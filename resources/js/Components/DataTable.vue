@@ -61,6 +61,21 @@ export default {
 							<DeleteFormButton/>
 						</span>
 					</slot>
+					<slot v-else-if="column.attribute.includes('is_')" v-bind="{ column, resource }">
+						<div v-if="resource[column.attribute] == true">
+							<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+								 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path d="M4.5 12.75l6 6 9-13.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</div>
+						<div v-else>
+							<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5"
+								 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+
+						</div>
+					</slot>
 					<slot v-else name="cell" v-bind="{ column, resource }">
 						{{ resource[column.attribute] }}
 					</slot>

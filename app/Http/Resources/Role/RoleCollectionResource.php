@@ -22,8 +22,9 @@ class RoleCollectionResource extends JsonResource
         return [
             'id' => data_get($this, 'id'),
             'name' => data_get($this, 'name'),
-            'created_at' => data_get($this, 'created_at') ?
-                data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'is_actor' => data_get($this, 'is_actor'),
+            'is_producer' => data_get($this, 'is_producer'),
+            'is_director' => data_get($this, 'is_director'),
             'actions' => [
                 'edit' => route('roles.edit', ['role' => data_get($this, 'id')]),
                 'destroy' => route('roles.destroy', ['role' => data_get($this, 'id')])

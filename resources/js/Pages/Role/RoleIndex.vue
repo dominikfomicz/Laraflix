@@ -23,7 +23,9 @@ export default {
 		return {
 			columns: [
 				{name: 'Name', attribute: 'name'},
-				{name: 'Created at', attribute: 'created_at'},
+				{name: 'Actor', attribute: 'is_actor'},
+				{name: 'Producer', attribute: 'is_producer'},
+				{name: 'Director', attribute: 'is_director'},
 				{name: '', attribute: 'actions', class: 'text-right'},
 			]
 		}
