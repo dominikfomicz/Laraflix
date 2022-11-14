@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
-use App\Http\Requests\MovieStoreRequest;
-use App\Http\Requests\MovieUpdateRequest;
+use App\Http\Requests\Movie\MovieStoreRequest;
+use App\Http\Requests\Movie\MovieUpdateRequest;
 use App\Models\Movie;
 
-class MovieService
+class MovieService implements MovieServiceInterface
 {
     /**
+     * Create movie from request data.
+     *
      * @param  MovieStoreRequest  $request
      * @return Movie
      */
@@ -25,6 +27,11 @@ class MovieService
     }
 
     /**
+     * Sync movie_person table from request data.
+     * Clear add relations for given movie,
+     * then attach new ones.
+     * Method is used for both creating and updating logic.
+     *
      * @param  Movie  $movie
      * @param  array  $moviePersons
      */
@@ -41,6 +48,8 @@ class MovieService
     }
 
     /**
+     * Update movie from request data.
+     *
      * @param  MovieUpdateRequest  $request
      * @param  Movie  $movie
      * @return bool

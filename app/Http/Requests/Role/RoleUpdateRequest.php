@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Role;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleStoreRequest extends FormRequest
+class RoleUpdateRequest extends FormRequest
 {
     /**
      * @return array

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Person;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PersonUpdateRequest extends FormRequest
+class PersonStoreRequest extends FormRequest
 {
     /**
      * @return array
@@ -12,7 +12,7 @@ class PersonUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3'
+            'name' => 'required|string|min:3',
         ];
     }
 }

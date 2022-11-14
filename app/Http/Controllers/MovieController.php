@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MovieStoreRequest;
-use App\Http\Requests\MovieUpdateRequest;
+use App\Http\Requests\Movie\MovieStoreRequest;
+use App\Http\Requests\Movie\MovieUpdateRequest;
 use App\Http\Resources\Movie\MovieCollectionResource;
 use App\Http\Resources\MoviePerson\MoviePersonResource;
 use App\Http\Resources\Person\PersonSelectCollectionResource;

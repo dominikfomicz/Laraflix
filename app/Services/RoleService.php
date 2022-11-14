@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
-use App\Http\Requests\RoleStoreRequest;
-use App\Http\Requests\RoleUpdateRequest;
+use App\Http\Requests\Role\RoleStoreRequest;
+use App\Http\Requests\Role\RoleUpdateRequest;
 use App\Models\Role;
 
-class RoleService
+class RoleService implements RoleServiceInterface
 {
     /**
+     * Create role from request data.
+     *
      * @param  RoleStoreRequest  $request
      * @return Role
      */
@@ -23,6 +25,8 @@ class RoleService
     }
 
     /**
+     * Update role from request data.
+     *
      * @param  RoleUpdateRequest  $request
      * @param  Role  $role
      * @return bool

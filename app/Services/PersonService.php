@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
-use App\Http\Requests\PersonStoreRequest;
-use App\Http\Requests\PersonUpdateRequest;
+use App\Http\Requests\Person\PersonStoreRequest;
+use App\Http\Requests\Person\PersonUpdateRequest;
 use App\Models\Person;
 
-class PersonService
+class PersonService implements PersonServiceInterface
 {
     /**
+     * Create person from request data.
+     *
      * @param  PersonStoreRequest  $request
      * @return Person
      */
@@ -20,6 +22,8 @@ class PersonService
     }
 
     /**
+     * Update person from request data.
+     *
      * @param  PersonUpdateRequest  $request
      * @param  Person  $person
      * @return bool

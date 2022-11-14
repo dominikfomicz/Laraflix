@@ -53,6 +53,10 @@ class Movie extends Model
     }
 
     /**
+     * Table: movie_person
+     * Relations:
+     * movie_person.movie_id = movies.id
+     *
      * @return HasMany
      */
     public function moviePersons(): HasMany

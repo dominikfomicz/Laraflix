@@ -8,6 +8,8 @@ use App\Models\User;
 class MoviePolicy
 {
     /**
+     * Checks if user owns movie
+     *
      * @param  User  $user
      * @param  Movie  $movie
      * @return bool
