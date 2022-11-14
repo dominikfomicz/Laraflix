@@ -63,15 +63,11 @@ class PersonController extends Controller
         return abort(500);
     }
 
-    public function show(Person $person)
-    {
-    }
-
     /**
      * @param  Person  $person
      * @return Response
      */
-    public function edit(Person $person)
+    public function edit(Person $person): Response
     {
         return Inertia::render(
             'Person/PersonEdit', [

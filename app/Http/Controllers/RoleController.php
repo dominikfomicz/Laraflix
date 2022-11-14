@@ -61,10 +61,6 @@ class RoleController extends Controller
         return abort(500);
     }
 
-    public function show(Role $role)
-    {
-    }
-
     /**
      * @param  Role  $role
      * @return Response

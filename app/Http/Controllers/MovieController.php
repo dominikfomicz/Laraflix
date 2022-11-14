@@ -86,10 +86,6 @@ class MovieController extends Controller
         return abort(500);
     }
 
-    public function show(Movie $movie)
-    {
-    }
-
     /**
      * @param  Movie  $movie
      * @return Response
