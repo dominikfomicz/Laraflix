@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Role;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -22,7 +22,12 @@ class RoleCollectionResource extends JsonResource
         return [
             'id' => data_get($this, 'id'),
             'name' => data_get($this, 'name'),
-            'created_at' => data_get($this, 'created_at') ? data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'created_at' => data_get($this, 'created_at') ?
+                data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'actions' => [
+                'edit' => route('roles.edit', ['role' => data_get($this, 'id')]),
+                'destroy' => route('roles.destroy', ['role' => data_get($this, 'id')])
+            ]
         ];
     }
 }

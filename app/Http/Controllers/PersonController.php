@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonStoreRequest;
 use App\Http\Requests\PersonUpdateRequest;
-use App\Http\Resources\PersonCollectionResource;
+use App\Http\Resources\Person\PersonCollectionResource;
 use App\Models\Person;
 use App\Repositories\PersonRepository;
 use App\Services\PersonService;

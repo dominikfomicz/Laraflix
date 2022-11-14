@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleStoreRequest;
 use App\Http\Requests\RoleUpdateRequest;
-use App\Http\Resources\RoleCollectionResource;
+use App\Http\Resources\Role\RoleCollectionResource;
 use App\Models\Role;
 use App\Repositories\RoleRepository;
 use App\Services\RoleService;

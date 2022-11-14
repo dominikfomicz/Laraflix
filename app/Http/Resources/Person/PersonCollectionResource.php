@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Person;
 
 use App\Models\Person;
 use Illuminate\Http\Request;
@@ -22,7 +22,12 @@ class PersonCollectionResource extends JsonResource
         return [
             'id' => data_get($this, 'id'),
             'name' => data_get($this, 'name'),
-            'created_at' => data_get($this, 'created_at') ? data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'created_at' => data_get($this, 'created_at') ?
+                data_get($this, 'created_at')->format('Y-m-d H:i') : '',
+            'actions' => [
+                'edit' => route('persons.edit', ['person' => data_get($this, 'id')]),
+                'destroy' => route('persons.destroy', ['person' => data_get($this, 'id')])
+            ]
         ];
     }
 }

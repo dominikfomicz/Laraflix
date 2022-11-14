@@ -130,3 +130,10 @@ const showingNavigationDropdown = ref(false);
 		</div>
 	</div>
 </template>
+
+<style>
+:root {
+	--vs-line-height: 1.8;
+	--vs-actions-padding: 4px 10px 0 6px;
+}
+</style>

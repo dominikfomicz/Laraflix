@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MovieStoreRequest;
 use App\Http\Requests\MovieUpdateRequest;
-use App\Http\Resources\MovieCollectionResource;
+use App\Http\Resources\Movie\MovieCollectionResource;
+use App\Http\Resources\MoviePerson\MoviePersonResource;
+use App\Http\Resources\Person\PersonSelectCollectionResource;
+use App\Http\Resources\Role\RoleSelectCollectionResource;
 use App\Models\Movie;
+use App\Repositories\MoviePersonRepository;
 use App\Repositories\MovieRepository;
+use App\Repositories\PersonRepository;
+use App\Repositories\RoleRepository;
 use App\Services\MovieService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
@@ -18,10 +24,16 @@ class MovieController extends Controller
     /**
      * @param  MovieRepository  $repository
      * @param  MovieService  $service
+     * @param  PersonRepository  $personRepository
+     * @param  RoleRepository  $roleRepository
+     * @param  MoviePersonRepository  $moviePersonRepository
      */
     public function __construct(
         private MovieRepository $repository,
-        private MovieService $service
+        private MovieService $service,
+        private PersonRepository $personRepository,
+        private RoleRepository $roleRepository,
+        private MoviePersonRepository $moviePersonRepository,
     ) {
     }
 
@@ -45,8 +57,17 @@ class MovieController extends Controller
      */
     public function create(): Response
     {
+        $persons = PersonSelectCollectionResource::collection(
+            $this->personRepository->getAll()
+        );
+
+        $roles = RoleSelectCollectionResource::collection(
+            $this->roleRepository->getAll()
+        );
+
         return Inertia::render(
             'Movie/MovieCreate',
+            compact('persons', 'roles')
         );
     }
 
@@ -78,10 +99,19 @@ class MovieController extends Controller
     {
         $this->authorize('own', $movie);
 
+        $persons = PersonSelectCollectionResource::collection(
+            $this->personRepository->getAll()
+        );
+        $roles = RoleSelectCollectionResource::collection(
+            $this->roleRepository->getAll()
+        );
+        $moviePersons = MoviePersonResource::collection(
+            $this->moviePersonRepository->getByMovieId(data_get($movie, 'id'))
+        );
+
         return Inertia::render(
-            'Movie/MovieEdit', [
-                'movie' => $movie
-            ]
+            'Movie/MovieEdit',
+            compact('movie', 'persons', 'roles', 'moviePersons')
         );
     }
 

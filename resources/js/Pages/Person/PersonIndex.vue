@@ -24,6 +24,7 @@ export default {
 			columns: [
 				{name: 'Name', attribute: 'name'},
 				{name: 'Created at', attribute: 'created_at'},
+				{name: '', attribute: 'actions', class: 'text-right'},
 			]
 		}
 	},

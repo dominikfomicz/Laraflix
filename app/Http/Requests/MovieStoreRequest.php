@@ -12,7 +12,9 @@ class MovieStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|min:3'
+            'title' => 'required|string|min:3',
+            'movie_persons.*.person' => 'required_unless:movie_persons,array',
+            'movie_persons.*.role' => 'required_unless:movie_persons,array',
         ];
     }
 }
