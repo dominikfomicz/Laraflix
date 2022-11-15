@@ -68,4 +68,11 @@ class PasswordResetTest extends TestCase
             return true;
         });
     }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutVite();
+    }
 }

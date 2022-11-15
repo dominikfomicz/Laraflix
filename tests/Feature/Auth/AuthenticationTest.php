@@ -42,4 +42,11 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
     }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->withoutVite();
+    }
 }
