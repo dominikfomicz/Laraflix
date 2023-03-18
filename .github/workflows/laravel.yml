@@ -32,3 +32,5 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: php artisan test
+    - name: Codeball AI Code Review
+      uses: sturdy-dev/codeball-action@v2.6.0
